@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ASPToDoList.Services;
 
 namespace ASPToDoList
 {
@@ -21,6 +22,7 @@ namespace ASPToDoList
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IToDoItemService, FakeToDoItemService>();
             services.AddMvc();
         }
 
@@ -43,7 +45,7 @@ namespace ASPToDoList
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=ToDo}/{action=Index}/{id?}");
             });
         }
     }
